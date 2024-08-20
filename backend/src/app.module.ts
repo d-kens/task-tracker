@@ -3,26 +3,31 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TasksModule } from './tasks/tasks.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
-
-// TODO: Use .env for the db credentials
+import { ConfigModule, ConfigService  } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({ envFilePath: '.env', isGlobal: true }),
     TasksModule,
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3307,
-      username: 'root',
-      password: '',
-      database: 'task-manager-app',
-      entities: [__dirname + './**/*.entity.ts'],
-      autoLoadEntities: true,
-      synchronize: true,
-    })
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        type: configService.get<'mysql'>('DATASOURCE_TYPE'),
+        host: configService.get<string>('DATASOURCE_HOST'),
+        port: configService.get<number>('DATASOURCE_PORT') || 3306,
+        username: configService.get<string>('DATASOURCE_USERNAME'),
+        password: configService.get<string>('DATASOURCE_PASSWORD'),
+        database: configService.get<string>('DATASOURCE_DATABASE'),
+        entities: [__dirname + '/**/*.entity{.ts,.js}'],
+        autoLoadEntities: true,
+        synchronize: true,
+      }),
+    }),
 
   ],
   controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
+

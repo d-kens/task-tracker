@@ -1,8 +1,22 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { Logger } from '@nestjs/common';
+import * as process from 'process'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  await app.listen(3000);
+
+  console.log(process.env.WEB_DOMAIN)
+
+  app.enableCors({
+    origin: process.env.WEB_DOMAIN,
+  });
+
+  await app.listen(process.env.PORT);
 }
-bootstrap();
+
+bootstrap().then(() =>
+  Logger.log(
+    `🚀 Application is running on: http://localhost:${process.env.PORT}`,
+  ),
+);
