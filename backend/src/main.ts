@@ -6,8 +6,6 @@ import * as process from 'process'
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  console.log(process.env.WEB_DOMAIN)
-
   app.enableCors({
     origin: process.env.WEB_DOMAIN,
   });
