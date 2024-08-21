@@ -1,4 +1,10 @@
-<li>
-  <span>{{ task.title }}</span>
-  <span>{{ task.status }}</span>
+<li [ngClass]="getStatusClass()" (click)="toggleDescription()">
+  <div class="task-header">
+    <span class="status">{{ task.status }}</span>
+    <span class="title">{{ task.title }}</span>
+    <span class="delete-icon" (click)="deleteTask($event)">&#10060;</span>
+  </div>
+  <div class="task-description" *ngIf="showDescription">
+    {{ task.description }}
+  </div>
 </li>

@@ -1,4 +1,41 @@
-ul {
-  list-style-type: none;
-  padding: 0;
+/* Container for the no-tasks message */
+.no-tasks {
+  text-align: center;
+  color: #999;
+  padding: 20px;
+  font-size: 1.2rem;
 }
+
+
+/* Styles for the task list */
+.task-list {
+  list-style-type: none;
+  padding: 10px;
+  margin: 0 auto;
+  max-height: 400px;
+  max-width: 800px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f0f0f5;
+}
+
+/* Horizontal scrolling for large content */
+.task-list {
+  overflow-y: auto;
+  max-height: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Heading styling */
+.task-list-heading {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #333; 
+}
+

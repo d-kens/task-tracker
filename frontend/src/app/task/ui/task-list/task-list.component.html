@@ -1,17 +1,12 @@
-<div *ngIf="tasks.length === 0; else showTasks">
-  There are no wishes to display
+<div *ngIf="tasks.length === 0; else showTasks" class="no-tasks">
+  There are no tasks to display.
 </div>
 
 <ng-template #showTasks>
-  <ul class="wish-list">
+  <ul class="task-list">
     <task-list-item
       *ngFor="let task of tasks"
       [task]="task"
-    >
-    </task-list-item>
+    ></task-list-item>
   </ul>
 </ng-template>
-
-
-
-

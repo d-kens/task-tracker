@@ -1,7 +1,59 @@
 li {
-  border: 1px solid red;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff; /* White background for individual tasks */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds subtle shadow for task items */
+}
+
+li:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.task-header {
   display: flex;
   justify-content: space-between;
-  padding: 0.5rem 0;
-  border-bottom: 1px solid #ddd;
+  align-items: center;
+}
+
+.status {
+  font-weight: bold;
+}
+
+.title {
+  flex-grow: 1;
+  padding: 0 10px;
+}
+
+.delete-icon {
+  cursor: pointer;
+  color: red;
+  font-size: 1.2rem;
+}
+
+.task-description {
+  margin-top: 10px;
+  font-style: italic;
+  color: #555;
+}
+
+/* Status-based styles */
+.open-status {
+  border-left: 5px solid #007bff; /* Blue border for open tasks */
+}
+
+.in-progress-status {
+  border-left: 5px solid #ffc107; /* Yellow border for in-progress tasks */
+}
+
+.done-status {
+  border-left: 5px solid #28a745; /* Green border for done tasks */
+}
+
+/* Optional hover effect */
+li:hover {
+  background-color: rgba(0, 0, 0, 0.05);
 }
