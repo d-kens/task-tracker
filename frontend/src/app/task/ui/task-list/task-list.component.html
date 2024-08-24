@@ -2,33 +2,43 @@
 
   <div class="task-list-header">Your Tasks</div>
 
-  <div
-    class="task-list"
-  >
+
+  @if (tasks.length > 0) {
 
     <div
-      *ngFor="let task of tasks"
-      class="task-item"
-      [ngClass]="{
-        'status-open': task.status === 'OPEN',
-        'status-in-progress': task.status === 'IN_PROGRESS',
-        'status-done': task.status === 'DONE'
-      }"
+      class="task-list"
     >
 
-      <span class="floating-label">{{ task.status | titlecase }}</span>
+      <div
+        *ngFor="let task of tasks"
+        class="task-item"
+        [ngClass]="{
+          'status-open': task.status === 'OPEN',
+          'status-in-progress': task.status === 'IN_PROGRESS',
+          'status-done': task.status === 'DONE'
+        }"
+      >
 
-      <div class="task-header">
-        {{ task.title }}
+        <span class="floating-label">{{ task.status | titlecase }}</span>
 
-        <i class="pi pi-trash delete-icon"></i>
-      </div>
+        <div class="task-header">
+          {{ task.title }}
 
-      <div class="task-body">
-        {{ task.description }}
+          <i class="pi pi-trash delete-icon" (click)="deleteTask(task)"></i>
+        </div>
+
+        <div class="task-body">
+          {{ task.description }}
+        </div>
+
       </div>
 
     </div>
 
-  </div>
+  } @else {
+
+    <p>You currentky no tasks</p>
+
+  }
+
 </div>

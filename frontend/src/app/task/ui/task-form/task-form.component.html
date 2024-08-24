@@ -1,20 +1,39 @@
 <div class="form-container">
+
   <h2>Add Task</h2>
-  <form action="#">
-      <label for="task-title">Task Title</label>
-      <input type="text" id="task-title" name="task-title" placeholder="Enter task title" required>
 
-      <label for="task-details">Task Details</label>
-      <textarea id="task-details" name="task-details" rows="5" placeholder="Enter task details" required></textarea>
+  <form [formGroup]="taskForm" (ngSubmit)="addNewTask()">
 
-      <label for="task-priority">Status</label>
-      <select id="task-priority" name="task-priority" required>
-        <option value="">Select status</option>
-        <option value="OPEN">Open</option>
-        <option value="IN_PROGRESS">In Progress</option>
-        <option value="DONE">Done</option>
-      </select>
+    <label for="task-title">Task Title</label>
+    <input
+      type="text"
+      id="task-title"
+      formControlName="title"
+      placeholder="Enter task title"
+      required
+    >
 
-      <button type="submit">Add Task</button>
+
+    <label for="task-details">Task Details</label>
+    <textarea
+      id="task-details"
+      formControlName="description"
+      rows="5"
+      placeholder="Enter task details"
+      required
+    >
+    </textarea>
+
+    <label for="task-priority">Status</label>
+    <select id="task-priority" formControlName="status" required>
+      <option value="">Select status</option>
+      <option value="OPEN">Open</option>
+      <option value="IN_PROGRESS">In Progress</option>
+      <option value="DONE">Done</option>
+    </select>
+
+    <button type="submit" [disabled]="taskForm.invalid" >Add Task</button>
+
   </form>
+
 </div>

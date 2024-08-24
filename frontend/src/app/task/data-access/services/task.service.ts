@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular
 import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { Task } from '../models/task.model';
+import { Task, NewTask } from '../models/task.model';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +36,23 @@ export class TaskService {
     return this.http.get<Task[]>(this.baseUrl, options).pipe(catchError(this.handleError.bind(this)));
   }
 
+  addTask(task: NewTask): Observable<Task> {
+    const options = this.getStandardOptions();
+
+    return this.http.post<Task>(this.baseUrl, task, options).pipe(
+      catchError(this.handleError.bind(this))
+    )
+  }
+
+  deleteTask(id: number): Observable<{ message: string }> {
+    const options = this.getStandardOptions();
+
+
+    return this.http.delete<{ message: string }>(`${this.baseUrl}/${id}`, options).pipe(
+      catchError(this.handleError.bind(this))
+    );
+  }
+
 
   private handleError(error: HttpErrorResponse) {
 
@@ -49,19 +66,3 @@ export class TaskService {
   }
 
 }
-
-  // getTask(id: number): Observable<any> {
-  //   return this.http.get(`${this.baseUrl}/${id}`);
-  // }
-
-  // createTask(task: any): Observable<any> {
-  //   return this.http.post(this.baseUrl, task);
-  // }
-
-  // updateTaskStatus(id: number, status: string): Observable<any> {
-  //   return this.http.patch(`${this.baseUrl}/${id}/status`, { status });
-  // }
-
-  // deleteTask(id: number): Observable<any> {
-  //   return this.http.delete(`${this.baseUrl}/${id}`);
-  // }

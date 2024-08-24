@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { Task } from '../../data-access/models/task.model';
 import { CommonModule } from '@angular/common';
+import { TaskService } from '../../data-access/services/task.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'task-list',
@@ -10,27 +13,23 @@ import { CommonModule } from '@angular/common';
   styleUrl: './task-list.component.css'
 })
 export class TaskListComponent {
+  @Output() taskDeleted = new EventEmitter<Task>();
+  @Input() tasks: Task[] = [];
 
-  tasks: Task[] = [
-    {
-      id: 1,
-      title: "Example Task",
-      description: "This is an exmaple task description",
-      status: 'OPEN'
-    },
-    {
-      id: 2,
-      title: "Example Task",
-      description: "This is an exmaple task description",
-      status: 'DONE'
-    },
-    {
-      id: 3,
-      title: "Example Task",
-      description: "This is an exmaple task description",
-      status: 'IN_PROGRESS'
-    }
-  ]
+  private toastService = inject(ToastrService);
+  private taskService = inject(TaskService);
+
+
+
+  deleteTask(task: Task) {
+    this.taskService.deleteTask(task.id).subscribe({
+      next: message => {
+        this.toastService.success('Task deleted succesfully');
+        this.taskDeleted.emit(task)
+      },
+      error: err => this.toastService.error('Error deleting task', err)
+    })
+  }
 
 
 }

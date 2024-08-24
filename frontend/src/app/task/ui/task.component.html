@@ -2,12 +2,12 @@
 
   <!-- Task List -->
   <div style="flex: 1">
-    <task-list></task-list>
+    <task-list [tasks]="tasks" (taskDeleted)="onTaskDeleted($event)"></task-list>
   </div>
 
   <!-- Task Form -->
   <div style="flex: 1">
-    <task-form></task-form>
+    <task-form (addTask)="onTaskAdded($event)"></task-form>
   </div>
 
 </div>
