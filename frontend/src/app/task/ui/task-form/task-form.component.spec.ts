@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TaskListItemComponent } from './task-list-item.component';
+import { TaskFormComponent } from './task-form.component';
 
-describe('TaskListItemComponent', () => {
-  let component: TaskListItemComponent;
-  let fixture: ComponentFixture<TaskListItemComponent>;
+describe('TaskFormComponent', () => {
+  let component: TaskFormComponent;
+  let fixture: ComponentFixture<TaskFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TaskListItemComponent]
+      imports: [TaskFormComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TaskListItemComponent);
+    fixture = TestBed.createComponent(TaskFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

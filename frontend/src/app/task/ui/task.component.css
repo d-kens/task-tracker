@@ -1,3 +1,22 @@
 .task-container {
   padding: 20px;
+  max-width: 1200px;
+  width: full;
+  margin: auto;
+
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  gap: 20px;
+}
+
+
+/* Responsive Styling */
+@media (min-width: 1000px) {
+  .task-container {
+
+    flex-direction: row;
+    align-items: stretch;
+
+  }
 }
