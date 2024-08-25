@@ -1,14 +1,21 @@
 FROM node:20.14-alpine3.20
 
+# Use a non-root user for security
 USER node
 
 WORKDIR /app
 
-COPY package*.json .
+# Copy package.json and package-lock.json (if present) first
+COPY --chown=node:node package*.json ./
 
-RUN npm ci
+# Clean npm cache to prevent potential issues
+RUN npm cache clean --force
 
-COPY . .
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the application code
+COPY --chown=node:node . .
 
 EXPOSE 4200
 

@@ -1,0 +1,45 @@
+version: '3.8'
+
+services: 
+  web:
+    build: ./frontend
+    ports:
+      - '4200:4200'
+  
+  api:
+    build: ./backend
+    ports:
+      - '3001:3001'
+    environment:
+      - NODE_ENV=local
+      - PORT=3001
+      - DATASOURCE_TYPE=mysql
+      - DATASOURCE_HOST=db           # Matches the service name
+      - DATASOURCE_PORT=3306
+      - DATASOURCE_DATABASE=tasks
+      - DATASOURCE_USERNAME=root
+      - DATASOURCE_PASSWORD=12345678
+      - WEB_DOMAIN=http://localhost:4200
+    depends_on:
+      - db
+
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'tasks'
+      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: '12345678'
+      MYSQL_ROOT_PASSWORD: '12345678'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - my-db:/var/lib/mysql
+
+volumes:
+  my-db:
+
+
+
