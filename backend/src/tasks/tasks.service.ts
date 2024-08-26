@@ -56,8 +56,6 @@ export class TasksService {
 
     await task.save();
 
-    console.log(task);
-
     return task;
   }
 
