@@ -14,10 +14,10 @@ services:
       - NODE_ENV=local
       - PORT=3001
       - DATASOURCE_TYPE=mysql
-      - DATASOURCE_HOST=db           # Matches the service name
+      - DATASOURCE_HOST=db           
       - DATASOURCE_PORT=3306
       - DATASOURCE_DATABASE=tasks
-      - DATASOURCE_USERNAME=root
+      - DATASOURCE_USERNAME=db_user
       - DATASOURCE_PASSWORD=12345678
       - WEB_DOMAIN=http://localhost:4200
     depends_on:
@@ -28,11 +28,11 @@ services:
     restart: always
     environment:
       MYSQL_DATABASE: 'tasks'
-      MYSQL_USER: 'root'
+      MYSQL_USER: 'db_user'
       MYSQL_PASSWORD: '12345678'
-      MYSQL_ROOT_PASSWORD: '12345678'
+      MYSQL_ROOT_PASSWORD: 'k!ngv!'
     ports:
-      - '3306:3306'
+      - '3307:3306'
     expose:
       - '3306'
     volumes:
