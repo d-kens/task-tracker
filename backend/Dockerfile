@@ -11,7 +11,7 @@ COPY --chown=node:node tsconfig.json ./
 
 RUN npm install
 
-COPY . .
+COPY --chown=node:node . .
 
 EXPOSE 3001
 
