@@ -10,7 +10,7 @@ import { Task, NewTask } from '../models/task.model';
 })
 export class TaskService {
 
-  private baseUrl = 'http://localhost:3000/tasks';
+  private baseUrl = 'http://api:3000/tasks';
 
   constructor(private http: HttpClient) {}
 
